@@ -10,7 +10,11 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:serve": "nodemon --watch build --exec \"node build/server/index.js\"",
     "dev:build-client": "webpack --config ./webpack.client.dev.js --hot --watch",
-    "dev:build-server": "webpack --config ./webpack.server.js --watch"
+    "dev:build-server": "webpack --config ./webpack.server.js --watch",
+    "build": "rm -rf build && npm-run-all --serial prod:build-*",
+    "prod:": "node 'build/server/index.js'",
+    "prod:build-client": "webpack --config ./webpack.client.prod.js",
+    "prod:build-server": "webpack --config ./webpack.server.js"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -35,6 +39,7 @@
     "eslint-plugin-react": "^7.27.1",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-dev-server": "^4.6.0"
   }
 }
