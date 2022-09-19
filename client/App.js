@@ -1,22 +1,20 @@
 import React, { useState } from 'react'
-import Hello from './Components/Hello'
+import HostWrap from './Components/HostWrap'
 import ClientOnly from './Components/ClientOnly'
 
 const Header = React.lazy(() => import('remoteComponents/Header'));
 
 const AppComponent = () => {
-  const [name] = useState('world')
+  const [name] = useState('Im Host App')
 
   return (
     <>
-    <h1>Im Host</h1>
-    <Hello name={name} />
     <ClientOnly>
-    <React.Suspense fallback="Loading Header">
-      <Header />
-    </React.Suspense>
-      hello
-    </ClientOnly>
+      <React.Suspense fallback="Loading Header">
+          <Header name="Im Remote"/>
+      </React.Suspense>
+      </ClientOnly>
+    <HostWrap name='Im Host App' />
     </>
   )
 }

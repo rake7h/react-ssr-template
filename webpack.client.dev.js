@@ -31,7 +31,8 @@ module.exports = {
       name: 'host_app',
       remotes: {
         remoteComponents: 'remoteComponents@http://localhost:3000/remoteEntry.js'
-      }
+      },
+      shared: ['react', 'react-dom', 'styled-components']
     })
   ]
 }

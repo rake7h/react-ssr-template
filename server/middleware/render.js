@@ -1,27 +1,32 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
+import { renderToString } from 'react-dom/server'
 import App from '../../client/App'
+import { ServerStyleSheet } from 'styled-components'
 
-const serverTemplate = (rootHTML) => {
+const serverTemplate = ({ html, css }) => {
   return `
   <html lang="en">
     <head>
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>App</title>
+      <title>Host</title>
+      ${css}
     </head>
     <body>
-      <div id="root">${rootHTML}</div>
+      <div id="root">${html}</div>
       <script src="build/client/index.js"> </script>
     </body>
   </html>
   `
 }
 const renderOnServer = (req, res) => {
-  const appHTML = ReactDOMServer.renderToString(<App />)
-  const HTML = serverTemplate(appHTML)
-  return res.send(HTML)
+  const sheet = new ServerStyleSheet()
+  const HTML = renderToString(sheet.collectStyles(<App />))
+  const styleTags = sheet.getStyleTags() // or sheet.getStyleElement();
+
+  const finalMarkup = serverTemplate({ html: HTML, css: styleTags })
+  return res.send(finalMarkup)
 }
 
 export default renderOnServer
