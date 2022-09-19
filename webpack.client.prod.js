@@ -1,5 +1,5 @@
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { ModuleFederationPlugin } = require('webpack').container
 
 module.exports = {
   entry: './client/index.js',
@@ -27,10 +27,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false,
-      reportFilename: 'bundle-analysis-client.html'
+    new ModuleFederationPlugin({
+      name: 'host_app',
+      remotes: {
+        commonHeader: 'remoteComponents@http://localhost:3000/remoteEntry.js'
+      }
     })
   ]
 }

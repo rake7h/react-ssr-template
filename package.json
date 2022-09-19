@@ -12,7 +12,7 @@
     "dev:build-client": "webpack --config ./webpack.client.dev.js --hot --watch",
     "dev:build-server": "webpack --config ./webpack.server.js --watch",
     "build": "rm -rf build && npm-run-all --serial prod:build-*",
-    "prod:": "node 'build/server/index.js'",
+    "prod:start": "node 'build/server/index.js'",
     "prod:build-client": "webpack --config ./webpack.client.prod.js",
     "prod:build-server": "webpack --config ./webpack.server.js"
   },

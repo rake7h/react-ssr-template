@@ -2,7 +2,7 @@ import express from 'express'
 import renderOnServer from './middleware/render'
 
 const app = express()
-const port = 3000
+const port = 3100
 
 app.listen(port, () => {
   console.log(`Server app is listening at http://localhost:${port}`)
