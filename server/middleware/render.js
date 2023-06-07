@@ -18,7 +18,16 @@ const serverTemplate = (rootHTML) => {
   </html>
   `
 }
+
 const renderOnServer = (req, res) => {
+
+  const browserRex = async () => {
+    const { getUserAgentRegex } = await import('browserslist-useragent-regexp')
+    // should print the function
+    console.log('getUserAgentRegex', getUserAgentRegex)
+  }
+  browserRex()
+
   const appHTML = ReactDOMServer.renderToString(<App />)
   const HTML = serverTemplate(appHTML)
   return res.send(HTML)
