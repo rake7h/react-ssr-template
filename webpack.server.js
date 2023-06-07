@@ -1,5 +1,6 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
+const NodemonPlugin = require('nodemon-webpack-plugin') // Ding
 
 module.exports = {
   entry: './server/index.js',
@@ -30,5 +31,14 @@ module.exports = {
   },
   externals: [
     nodeExternals()
+  ],
+  plugins: [
+    new NodemonPlugin({
+      // If using more than one entry, you can specify
+      // which output file will be restarted.
+      script: './build/server/index.js',
+      watch: path.resolve('./build/server'),
+      ext: 'js,jsx,json,ts,tsx,'
+    })
   ]
 }
